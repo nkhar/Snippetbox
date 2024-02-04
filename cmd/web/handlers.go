@@ -2,7 +2,6 @@ package main
 
 import(
     "fmt"
-    "log"
     "net/http"
     "strconv"
 )
@@ -23,7 +22,6 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
     }
 
     fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
-//    w.Write([]byte("Display a specific snippet..."))
 }
 
 func snippetCreate(w http.ResponseWriter, r *http.Request){
@@ -33,16 +31,4 @@ func snippetCreate(w http.ResponseWriter, r *http.Request){
         return
     }
     w.Write([]byte("Create a new snippet..."))
-}
-
-func main() {
-    //fmt.Println("Hello world!")
-    mux := http.NewServeMux()
-    mux.HandleFunc("/", home)
-    mux.HandleFunc("/snippet/view", snippetView)
-    mux.HandleFunc("/snippet/create", snippetCreate)
-
-    log.Println("Starting server on :4000")
-    err := http.ListenAndServe(":4000", mux)
-    log.Fatal(err)
 }
